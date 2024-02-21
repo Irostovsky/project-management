@@ -15,6 +15,23 @@ function App() {
     });
   };
 
+  const handleAddProject = (project) => {
+    project.id = Math.random();
+    setProjectsState((prevState) => {
+      return {
+        ...prevState,
+        projects: [...prevState.projects, project],
+        selectedProjectId: project.id,
+      };
+    });
+  };
+
+  const handleSelectProject = (projectId) => {
+    setProjectsState((prevState) => {
+      return { ...prevState, selectedProjectId: projectId };
+    });
+  };
+
   const cancelNewProjectFormHandler = () => {
     setProjectsState((prevState) => {
       return { ...prevState, selectedProjectId: undefined };
@@ -24,17 +41,27 @@ function App() {
   let content;
   if (projectsState.selectedProjectId === null) {
     content = (
-      <NewProject onCancelNewProjectForm={cancelNewProjectFormHandler} />
+      <NewProject
+        onCancelNewProjectForm={cancelNewProjectFormHandler}
+        onAddProject={handleAddProject}
+      />
     );
   } else if (projectsState.selectedProjectId === undefined) {
     content = <NoProjectsSelected onStartAddProject={handleStartAddProject} />;
   } else {
-    content = "Show selected project TBC";
+    const selectedProject = projectsState.projects.find(
+      (item) => item.id === projectsState.selectedProjectId
+    );
+    content = <b>{selectedProject.title}</b>;
   }
 
   return (
     <main className=" h-screen my-8 flex gap-8">
-      <ProjectsSidebar onStartAddProject={handleStartAddProject} />
+      <ProjectsSidebar
+        onStartAddProject={handleStartAddProject}
+        projects={projectsState.projects}
+        onSelectProject={handleSelectProject}
+      />
       {content}
     </main>
   );

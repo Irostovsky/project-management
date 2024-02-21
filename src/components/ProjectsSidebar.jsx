@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "./Button";
 
-const ProjectsSidebar = ({ onStartAddProject }) => {
+const ProjectsSidebar = ({ onStartAddProject, onSelectProject, projects }) => {
   return (
     <aside className="w-1/3  px-8 py-16 bg-stone-900 text-stone-50 md:w-72 rounded-r-xl">
       <h2 className="mb-8 font-bold uppercase md:text-xl text-stone-200">
@@ -10,7 +10,13 @@ const ProjectsSidebar = ({ onStartAddProject }) => {
       <div>
         <Button onClick={onStartAddProject}>+ Add Project</Button>
       </div>
-      <ul>TBC list of projects</ul>
+      <ul className="mt-4">
+        {projects.map(({ id, title }) => (
+          <li key={id} onClick={() => onSelectProject(id)}>
+            {title}
+          </li>
+        ))}
+      </ul>
     </aside>
   );
 };
