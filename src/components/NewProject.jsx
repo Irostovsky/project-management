@@ -2,7 +2,7 @@ import Input from "./Input.jsx";
 import React, { useRef } from "react";
 import Modal from "./Modal.jsx";
 
-const NewProject = ({ onCancelNewProjectForm, onAddProject }) => {
+const NewProject = ({ onCancel, onAdd }) => {
   const title = useRef();
   const description = useRef();
   const dueDate = useRef();
@@ -21,7 +21,7 @@ const NewProject = ({ onCancelNewProjectForm, onAddProject }) => {
       description: enteredDescription,
       dueDate: enteredDueDate,
     };
-    onAddProject(project);
+    onAdd(project);
   }
 
   return (
@@ -41,7 +41,7 @@ const NewProject = ({ onCancelNewProjectForm, onAddProject }) => {
         <menu className="flex items-center justify-end gap-4 my-4">
           <li>
             <button
-              onClick={onCancelNewProjectForm}
+              onClick={onCancel}
               className="text-stone-800 hover:text-stone-950 "
             >
               Cancel

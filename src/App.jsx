@@ -32,7 +32,7 @@ function App() {
     });
   };
 
-  const cancelNewProjectFormHandler = () => {
+  const handleCancelAddProject = () => {
     setProjectsState((prevState) => {
       return { ...prevState, selectedProjectId: undefined };
     });
@@ -41,10 +41,7 @@ function App() {
   let content;
   if (projectsState.selectedProjectId === null) {
     content = (
-      <NewProject
-        onCancelNewProjectForm={cancelNewProjectFormHandler}
-        onAddProject={handleAddProject}
-      />
+      <NewProject onCancel={handleCancelAddProject} onAdd={handleAddProject} />
     );
   } else if (projectsState.selectedProjectId === undefined) {
     content = <NoProjectsSelected onStartAddProject={handleStartAddProject} />;
@@ -52,11 +49,15 @@ function App() {
     const selectedProject = projectsState.projects.find(
       (item) => item.id === projectsState.selectedProjectId
     );
-    content = <b>{selectedProject.title}</b>;
+    content = (
+      <div className="mt-16">
+        <b>{selectedProject.title}</b>
+      </div>
+    );
   }
 
   return (
-    <main className=" h-screen my-8 flex gap-8">
+    <main className=" h-screen flex gap-8">
       <ProjectsSidebar
         onStartAddProject={handleStartAddProject}
         projects={projectsState.projects}
