@@ -1,6 +1,7 @@
 import NewTask from "./NewTask";
+import Task from "./Task";
 
-const Tasks = ({ tasks, onAddTask }) => {
+const Tasks = ({ tasks, onAddTask, onDeleteTask }) => {
   let content = (
     <p className="text-stone-800 my-4 ">
       This project does not have any tasks yet.
@@ -10,7 +11,9 @@ const Tasks = ({ tasks, onAddTask }) => {
     content = (
       <ul>
         {tasks.map((task) => (
-          <li key={task.id}>{task.name}</li>
+          <li key={task.id}>
+            <Task task={task} onDelete={onDeleteTask} />
+          </li>
         ))}
       </ul>
     );
