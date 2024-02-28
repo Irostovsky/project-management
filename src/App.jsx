@@ -56,9 +56,9 @@ function App() {
       const task = {
         id: Math.random(),
         name: taskName,
-        project_id: prevState.selectedProjectId,
+        projectId: prevState.selectedProjectId,
       };
-      return { ...prevState, tasks: [...prevState.tasks, task] };
+      return { ...prevState, tasks: [task, ...prevState.tasks] };
     });
   };
 
@@ -74,7 +74,7 @@ function App() {
       (item) => item.id === projectsState.selectedProjectId
     );
     const projectTasks = projectsState.tasks.filter(
-      (task) => task.project_id === projectsState.selectedProjectId
+      (task) => task.projectId === projectsState.selectedProjectId
     );
     content = (
       <SelectedProject
