@@ -9,7 +9,7 @@ const Tasks = ({ tasks, onAddTask, onDeleteTask }) => {
   );
   if (tasks.length) {
     content = (
-      <ul>
+      <ul className="p-4 mt-8 rounded-md bg-stone-100 ">
         {tasks.map((task) => (
           <li key={task.id}>
             <Task task={task} onDelete={onDeleteTask} />

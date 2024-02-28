@@ -3,10 +3,10 @@ const Task = ({ task, onDelete }) => {
     onDelete(taskId);
   };
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex justify-between my-4">
       <p>{task.name}</p>
       <button
-        className="text-stone-700 hover:text-stone-950"
+        className="text-stone-700 hover:text-red-500"
         onClick={() => handleClick(task.id)}
       >
         Delete
