@@ -8,6 +8,9 @@ const NewTask = ({ onAdd }) => {
   };
 
   const handleSave = () => {
+    if (!name.trim()) {
+      return;
+    }
     onAdd(name);
     setName("");
   };
